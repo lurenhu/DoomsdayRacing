@@ -20,7 +20,7 @@ export default class NewClass extends cc.Component {
 
     // onLoad () {}
 
-    start () {
+    start() {
     }
 
     // update (dt) {}
