@@ -59,5 +59,20 @@
       }
     }
   },
-  "events": []
+  "events": [
+    {
+      "frame": 0,
+      "func": "setAttackingState",
+      "params": [
+        true
+      ]
+    },
+    {
+      "frame": 0.6666666666666666,
+      "func": "setAttackingState",
+      "params": [
+        false
+      ]
+    }
+  ]
 }
