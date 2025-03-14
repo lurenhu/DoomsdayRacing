@@ -8,6 +8,7 @@
 const {ccclass, property} = cc._decorator;
 
 import BackGround from "../BackGround";
+import ScoreManager from "../ScoreManager";
 
 @ccclass
 export default class CarSpeed extends cc.Component {
@@ -23,6 +24,10 @@ export default class CarSpeed extends cc.Component {
         this.setButtonEvent("Fast");
         this.setButtonEvent("Mid");
         this.setButtonEvent("Slow");
+    }
+
+    protected update(dt: number): void {
+        ScoreManager.instance.scoreChange(this.bg.speed * dt);
     }
 
     setButtonEvent(buttonName: string)

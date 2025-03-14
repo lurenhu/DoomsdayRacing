@@ -56,6 +56,12 @@ export default class CarHealth extends cc.Component {
             this.node.emit(CarHealthEvent.HEALTH_ZERO);
         }
     }
+
+    // 恢复生命值
+    heal(amount: number) {
+        this._currentHealth = Math.min(this.maxHealth, this._currentHealth + amount);
+        this.emitHealthChanged();
+    }
     
     // 触发血量变化事件
     private emitHealthChanged() {
