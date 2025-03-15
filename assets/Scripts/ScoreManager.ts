@@ -23,6 +23,7 @@ export default class ScoreManager extends cc.Component {
     onLoad() {
         if (ScoreManager._instance === null) {
             ScoreManager._instance = this;
+            cc.game.addPersistRootNode(this.node);
         } else {
             this.node.destroy();
             cc.warn("ScoreManager 已存在，禁止重复创建");

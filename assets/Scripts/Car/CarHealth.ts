@@ -6,6 +6,10 @@
 //  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
 
 const {ccclass, property} = cc._decorator;
+
+import ScoreManager from "../ScoreManager";
+import GameResult from "../UI/GameResult";
+
 // 自定义事件类型
 export enum CarHealthEvent {
     HEALTH_CHANGED = "health-changed",
@@ -24,6 +28,9 @@ export default class CarHealth extends cc.Component {
     // 当前生命值（运行时私有变量）
     private _currentHealth: number = 0;
 
+    @property(cc.Label)
+    healthLabel: cc.Label = null;
+
     // 当前生命值的公共访问器（getter）
     get currentHealth(): number {
         return this._currentHealth;
@@ -33,8 +40,29 @@ export default class CarHealth extends cc.Component {
         // 初始化时设置满血
         this.resetHealth();
         this.node.on(CarHealthEvent.HEALTH_ZERO, () => { 
+            GameResult.instance.setResultScore(ScoreManager.instance.score);
+            GameResult.instance.getResultMenu();
             this.node.destroy();
         })
+
+        this.node.on(CarHealthEvent.HEALTH_CHANGED,this.updateUI,this);
+            
+    }
+
+    protected onDestroy(): void {
+        this.node.off(CarHealthEvent.HEALTH_ZERO, () => { 
+            GameResult.instance.setResultScore(ScoreManager.instance.score);
+            GameResult.instance.getResultMenu();
+            this.node.destroy();
+        })
+
+        this.node.off(CarHealthEvent.HEALTH_CHANGED, this.updateUI, this);
+    }
+
+    updateUI(event: { current: number, max: number }) {
+        if (this.healthLabel) {
+            this.healthLabel.string = "血量：" + `${event.current}/${event.max}`;
+        }
     }
 
     // 重置为满血

@@ -5,22 +5,17 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
 
-import CarHealth from "../Car/CarHealth";
+import ScoreManager from "../ScoreManager";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Uncollisionable extends cc.Component {
+export default class StartGame extends cc.Component {
 
-    @property
-    damage: number = 100;
-
-    onCollisionEnter(other: cc.Collider, self: cc.Collider)
+    gameStart()
     {
-        if (other.tag == 0) {
-            let comp = other.node.getComponent(CarHealth);
-            comp.takeDamage(this.damage);
-            this.node.destroy();
-        }
+        cc.director.loadScene("Mainscene", () => {
+            cc.log("加载Main场景");
+        });
     }
 }
