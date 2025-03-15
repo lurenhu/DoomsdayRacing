@@ -27,7 +27,8 @@ export default class CarSpeed extends cc.Component {
     }
 
     protected update(dt: number): void {
-        ScoreManager.instance.scoreChange(this.bg.speed * dt);
+        let sM = cc.find("ScoreManager").getComponent(ScoreManager);
+        sM.score += this.bg.speed * dt;
     }
 
     setButtonEvent(buttonName: string)

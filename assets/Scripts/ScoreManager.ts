@@ -15,32 +15,8 @@ export default class ScoreManager extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
-    private static _instance: ScoreManager = null;
-    public static get instance(): ScoreManager {
-        return this._instance;
-    }
-
-    onLoad() {
-        if (ScoreManager._instance === null) {
-            ScoreManager._instance = this;
-            cc.game.addPersistRootNode(this.node);
-        } else {
-            this.node.destroy();
-            cc.warn("ScoreManager 已存在，禁止重复创建");
-        }
-    }
-
     protected update(dt: number): void {
         this.label.string = "分数：" + Math.trunc(this.score);
     }
 
-    resetScore()
-    {
-        this.score = 0;
-    }
-
-    scoreChange(score:number)
-    {
-        this.score += score;
-    }
 }

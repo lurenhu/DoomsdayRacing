@@ -40,8 +40,10 @@ export default class CarHealth extends cc.Component {
         // 初始化时设置满血
         this.resetHealth();
         this.node.on(CarHealthEvent.HEALTH_ZERO, () => { 
-            GameResult.instance.setResultScore(ScoreManager.instance.score);
-            GameResult.instance.getResultMenu();
+            let gR = cc.find("GameResult");
+            let sM = cc.find("ScoreManager").getComponent(ScoreManager);
+            gR.active = true;
+            gR.getComponent(GameResult).setResultScore(sM.score);
             this.node.destroy();
         })
 
@@ -51,8 +53,10 @@ export default class CarHealth extends cc.Component {
 
     protected onDestroy(): void {
         this.node.off(CarHealthEvent.HEALTH_ZERO, () => { 
-            GameResult.instance.setResultScore(ScoreManager.instance.score);
-            GameResult.instance.getResultMenu();
+            let gR = cc.find("GameResult");
+            let sM = cc.find("ScoreManager").getComponent(ScoreManager);
+            gR.active = true;
+            gR.getComponent(GameResult).setResultScore(sM.score);
             this.node.destroy();
         })
 
