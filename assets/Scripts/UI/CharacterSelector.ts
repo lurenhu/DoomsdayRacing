@@ -31,12 +31,13 @@ export default class CharacterSelector extends cc.Component {
 
     onLoad() {
         this.initCharacters();
+        this.scrollToCharacter();
         this.btnLeft.node.on('click', this.prevCharacter, this);
         this.btnRight.node.on('click', this.nextCharacter, this);
     }
 
     initCharacters() {
-        // 示例：创建5个角色（根据实际需求修改）
+        // 示例：创建3个角色（根据实际需求修改）
         for (let i = 0; i < 3; i++) {
             const char = cc.instantiate(this.characterPrefab);
             this.scrollView.content.addChild(char);

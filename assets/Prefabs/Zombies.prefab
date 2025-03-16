@@ -184,8 +184,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "knockbackSpeed": 20,
-    "knockbackDuration": 0.3,
+    "knockbackSpeed": 100,
+    "knockbackDuration": 0.5,
     "_id": ""
   },
   {

@@ -7,9 +7,11 @@
 
 const {ccclass, property} = cc._decorator;
 
+
 @ccclass
 export default class ZombiesAttack extends cc.Component {
 
     @property
     damage: number = 10;
+
 }
